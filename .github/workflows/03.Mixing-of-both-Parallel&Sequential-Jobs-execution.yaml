@@ -1,0 +1,36 @@
+name: mixed job Execution workflow 
+on: workflow_dispatch
+jobs: 
+   checkout:
+     name: Executing checkout job
+     runs-on: ubuntu-latest
+     steps:
+       - name: Executing checkout step
+         run: echo "checkout job Successful"
+   build:
+     name: Executing build job
+     runs-on: ubuntu-latest
+     steps:
+       - name: Executing build step
+         run: echo "Build job Successful"
+   compile:
+     name: Executing compile job
+     needs: build
+     runs-on: ubuntu-latest
+     steps:
+       - name: Executing compile step
+         run: echo "compile job Successful"
+   test:
+     name: Executing test job
+     needs: compile
+     runs-on: ubuntu-latest
+     steps:
+       - name: Executing test step
+         run: echo "test job Successful"
+   deploy:
+     name: Executing deploy job
+     needs: [compile,test]
+     runs-on: ubuntu-latest
+     steps:
+       - name: Executing deploy step
+         run: echo "deploy job Successful"
