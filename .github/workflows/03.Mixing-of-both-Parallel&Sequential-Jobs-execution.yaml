@@ -29,7 +29,6 @@ jobs:
          run: echo "test job Successful"
    deploy:
      name: Executing deploy job
-     needs: [compile,test]
      runs-on: ubuntu-latest
      steps:
        - name: Executing deploy step
