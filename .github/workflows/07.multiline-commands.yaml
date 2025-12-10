@@ -1,0 +1,22 @@
+name: multiline commands execution
+on: workflow_dispatch
+jobs:
+  multiline: 
+   runs-on: ubuntu-latest
+   steps: 
+       - uses: actions/checkout@v3
+       - uses: hashicorp/setup-terraform@v3
+         with:
+          terraform_version: 1.7.5
+       - uses: actions/setup-python@v4
+         with: 
+          python-version: '3.x'
+       - run: |
+            env
+            chmod +x run_env.sh 
+            sh run_env.sh
+            python view_content.py
+            terraform init
+            terraform plan
+            terraform apply -auto-approve
+            cat terraform_output.txt
