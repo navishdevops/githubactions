@@ -1,0 +1,214 @@
+---------------------Question 1)   Parallel Job Execution with 4 jobs---------------------------
+name: parallel job Execution workflow 
+on: workflow_dispatch
+jobs: 
+   build:
+     name: Executing build job
+     runs-on: ubuntu-latest
+     steps:
+       - name: Executing build step
+         run: echo "Build job Successful"
+   compile:
+     name: Executing compile job
+     runs-on: ubuntu-latest
+     steps:
+       - name: Executing compile step
+         run: echo "compile job Successful"
+   test:
+     name: Executing test job
+     runs-on: ubuntu-latest
+     steps:
+       - name: Executing test step
+         run: echo "test job Successful"
+   deploy:
+     name: Executing deploy job
+     runs-on: ubuntu-latest
+     steps:
+       - name: Executing deploy step
+         run: echo "deploy job Successful"
+
+---------------------Question 2)   Sequential-Job-Execution-with-4-jobs.yaml---------------------------
+name: Sequential job Execution workflow 
+on: workflow_dispatch
+jobs: 
+   build:
+     name: Executing build job
+     runs-on: ubuntu-latest
+     steps:
+       - name: Executing build step
+         run: echo "Build job Successful"
+   compile:
+     name: Executing compile job
+     needs: build
+     runs-on: ubuntu-latest
+     steps:
+       - name: Executing compile step
+         run: echo "compile job Successful"
+   test:
+     name: Executing test job
+     needs: [build,compile]
+     runs-on: ubuntu-latest
+     steps:
+       - name: Executing test step
+         run: echo "test job Successful"
+   deploy:
+     name: Executing deploy job
+     needs: [test]
+     runs-on: ubuntu-latest
+     steps:
+       - name: Executing deploy step
+         run: echo "deploy job Successful"
+
+---------------------Question 3) Mixing-of-both-Parallel&Sequential-Jobs-execution.yaml--------------------------- 
+name: mixed job Execution workflow 
+on: workflow_dispatch
+jobs: 
+   checkout:
+     name: Executing checkout job
+     runs-on: ubuntu-latest
+     steps:
+       - name: Executing checkout step
+         run: echo "checkout job Successful"
+   build:
+     name: Executing build job
+     runs-on: ubuntu-latest
+     steps:
+       - name: Executing build step
+         run: echo "Build job Successful"
+   compile:
+     name: Executing compile job
+     needs: build
+     runs-on: ubuntu-latest
+     steps:
+       - name: Executing compile step
+         run: echo "compile job Successful"
+   test:
+     name: Executing test job
+     needs: compile
+     runs-on: ubuntu-latest
+     steps:
+       - name: Executing test step
+         run: echo "test job Successful"
+   deploy:
+     name: Executing deploy job
+     needs: [compile,test]
+     runs-on: ubuntu-latest
+     steps:
+       - name: Executing deploy step
+         run: echo "deploy job Successful"  
+
+---------------Question 4)   Checking out the repository code and execute the shell script inside the runner.yaml--------------------- 
+shell-script-running-inside-runner.yaml
+
+
+name: shell script running inside runner
+on: workflow_dispatch
+jobs:
+   checkout:
+     name: checkingout the repository
+     runs-on: ubuntu-latest
+     steps: 
+        - name: checkout the action
+          uses : actions/checkout@v6
+        - name : executing the permission for shell script
+          run : chmod +x run_env.sh
+        - name : executing the shell script
+          run : sh run_env.sh
+
+name: shell script running inside runner
+on: workflow_dispatch
+jobs:
+   checkout:
+     name: checkingout the repository
+     runs-on: ubuntu-latest
+     steps: 
+        - uses : actions/checkout@v6
+        - run : |
+            chmod +x run_env.sh 
+            sh run_env.sh
+---------------Question 5)   Checking out the repository code and execute the python script inside the runner.yaml--------------------- 
+
+name: Executing python script
+on: workflow_dispatch
+jobs:
+  checkout:
+    name: checkingout the repository and executing the  python script
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v4
+        with: 
+          python-version: '3.x'
+      - run : python view_content.py
+
+
+---------------Question 6)   Checking out the repository code and execute the terraform script inside the runner.yaml--------------------- 
+
+name: Terraform Create Simple Resource
+on:
+  workflow_dispatch:
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+       - uses: actions/checkout@v3
+       - uses: hashicorp/setup-terraform@v3
+         with:
+          terraform_version: 1.7.5
+       - run: terraform init
+       - run: terraform plan
+       - run: terraform apply -auto-approve
+       - run: cat terraform_output.txt
+
+---------------Question 7)   Use multiline commands to optimise the workflow--------------------- 
+
+name: multiline commands execution
+on: workflow_dispatch
+jobs:
+  multiline: 
+   runs-on: ubuntu-latest
+   steps: 
+       - uses: actions/checkout@v3
+       - uses: hashicorp/setup-terraform@v3
+         with:
+          terraform_version: 1.7.5
+       - uses: actions/setup-python@v4
+         with: 
+          python-version: '3.x'
+       - run: |
+            env
+            chmod +x run_env.sh 
+            sh run_env.sh
+            python view_content.py
+            terraform init
+            terraform plan
+            terraform apply -auto-approve
+            cat terraform_output.txt
+
+---------------Question 8)   Use action ( Chcekout actions - upload artifact - download artifact ) ------------------------  
+
+
+
+---------------Question 9)   use environment variables and display appropriate message --------------------------  
+
+name: default variables
+
+on: workflow_dispatch
+
+jobs:
+    default-env:
+        name: check the default variables
+        runs-on: ubuntu-latest
+        steps:
+            - run : env
+
+ ---------------Question 10)   use environment variables and display appropriate message --------------------------       
+
+
+  ---------------Question 11)  Release branches creation --------------------------   
+
+
+   ---------------Question 12)  once 1st workflow is completed automatically 2nd workflow should get trigger. --------------------------   
+
+
+
