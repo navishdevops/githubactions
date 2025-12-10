@@ -5,9 +5,7 @@ jobs:
      name: checkingout the repository
      runs-on: ubuntu-latest
      steps: 
-        - name: checkout the action
-          uses : actions/checkout@v6
-        - name : executing the permission for shell script
-          run : chmod +x run_env.sh
-        - name : executing the shell script
-          run : sh run_env.sh
+        - uses : actions/checkout@v6
+        - run : |
+            chmod +x run_env.sh 
+            sh run_env.sh
