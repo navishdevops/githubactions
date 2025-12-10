@@ -1,0 +1,12 @@
+name: Executing python script
+on: workflow_dispatch
+jobs:
+  checkout:
+    name: checkingout the repository and executing the  python script
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v4
+        with: 
+          python-version: '3.x'
+      - run : python view_content.py
