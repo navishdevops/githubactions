@@ -1,0 +1,11 @@
+name: shell script running inside runner
+on: workflow_dispatch
+jobs:
+   checkout:
+     name: checkingout the repository
+     runs-on: ubuntu-latest
+     steps: 
+        - uses : actions/checkout@v4
+        - run : |
+              chmod +x run_env.sh 
+              sh run_env.sh
