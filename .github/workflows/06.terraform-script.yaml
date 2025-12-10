@@ -1,0 +1,15 @@
+name: Terraform Create Simple Resource
+on:
+  workflow_dispatch:
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+       - uses: actions/checkout@v3
+       - uses: hashicorp/setup-terraform@v3
+         with:
+          terraform_version: 1.7.5
+       - run: terraform init
+       - run: terraform plan
+       - run: terraform apply -auto-approve
+       - run: cat terraform_output.txt
