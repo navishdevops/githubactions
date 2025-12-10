@@ -1,0 +1,30 @@
+name: Sequential job Execution workflow 
+on: workflow_dispatch
+jobs: 
+   build:
+     name: Executing build job
+     runs-on: ubuntu-latest
+     steps:
+       - name: Executing build step
+         run: echo "Build job Successful"
+   compile:
+     name: Executing compile job
+     needs: build
+     runs-on: ubuntu-latest
+     steps:
+       - name: Executing compile step
+         run: echo "compile job Successful"
+   test:
+     name: Executing test job
+     needs: [build,compile]
+     runs-on: ubuntu-latest
+     steps:
+       - name: Executing test step
+         run: echo "test job Successful"
+   deploy:
+     name: Executing deploy job
+     needs: [test]
+     runs-on: ubuntu-latest
+     steps:
+       - name: Executing deploy step
+         run: echo "deploy job Successful"
