@@ -9,13 +9,13 @@ jobs:
          run: echo "checkout job Successful"
    build:
      name: Executing build job
+     needs: checkout
      runs-on: ubuntu-latest
      steps:
        - name: Executing build step
          run: echo "Build job Successful"
    compile:
      name: Executing compile job
-     needs: build
      runs-on: ubuntu-latest
      steps:
        - name: Executing compile step
@@ -29,6 +29,7 @@ jobs:
          run: echo "test job Successful"
    deploy:
      name: Executing deploy job
+     needs: test
      runs-on: ubuntu-latest
      steps:
        - name: Executing deploy step
