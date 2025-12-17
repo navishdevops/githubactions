@@ -21,7 +21,8 @@ jobs:
      steps:
         - name: download artifact
           uses: actions/download-artifact@v4
-              name: env_var
+          with:
+             name: env_var
         - name: viewing the file
           run: |
            ls -lrt
