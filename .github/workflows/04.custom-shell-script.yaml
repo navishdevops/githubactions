@@ -1,0 +1,11 @@
+name: shell scripting
+on: workflow_dispatch
+jobs:
+   shell-job: 
+         name: executing shel script
+         runs-on: ubuntu-latest
+         steps:
+              - uses: actions/checkout@v6
+              - run : |
+                  chmod +x /src/main/run_env/env_new.sh
+                  sh /src/main/run_env/env_new.sh
