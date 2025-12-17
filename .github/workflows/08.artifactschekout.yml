@@ -1,0 +1,28 @@
+name: artifacts workflow
+on: workflow_dispatch
+jobs:
+  checkout:
+     name: artifacts upload
+     runs-on: ubuntu-latest
+     steps:
+        - name: checkout actions
+          uses: actions/checkout@v4
+        - name: shell script creation action
+          run: env  > env.sh
+        - name: upoad artifact
+          uses: actions/upload-artifact@v4
+          with: 
+             name: env_var
+             path: env.sh
+  download:
+      name: artifacts upload
+      runs-on: ubuntu-latest
+      needs: checkout
+      steps:
+        - name: download artifact
+          uses: actions/download-artifact@v4
+              name: env_var
+        - name: viewing the file
+          run: |
+           ls -lrt
+           cat env.sh
