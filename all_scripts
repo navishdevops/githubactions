@@ -126,6 +126,20 @@ jobs:
         - run : |
             chmod +x run_env.sh 
             sh run_env.sh
+
+name: shell scripting
+on: workflow_dispatch
+jobs:
+   shell-job: 
+         name: executing shel script
+         runs-on: ubuntu-latest
+         steps:
+              - uses: actions/checkout@v6
+              - run: |
+                  chmod +x /src/main/run_env/env_new.sh
+                  sh /src/main/run_env/env_new.sh
+
+
 ---------------Question 5)   Checking out the repository code and execute the python script inside the runner.yaml--------------------- 
 
 name: Executing python script
@@ -187,6 +201,36 @@ jobs:
 
 ---------------Question 8)   Use action ( Chcekout actions - upload artifact - download artifact ) ------------------------  
 
+name: artifacts workflow
+on: workflow_dispatch
+jobs:
+  checkout:
+     name: artifacts upload
+     runs-on: ubuntu-latest
+     steps:
+        - name: checkout actions
+          uses: actions/checkout@v4
+        - name: shell script creation action
+          run: env  > env.sh
+        - name: upoad artifact
+          uses: actions/upload-artifact@v4
+          with: 
+             name: env_var
+             path: env.sh
+  download:
+      name: artifacts upload
+      runs-on: ubuntu-latest
+      needs: checkout
+      steps:
+        - name: download artifact
+          uses: actions/download-artifact@v4
+          with:
+              name: env_var
+        - name: viewing the file
+          run: |
+           ls -lrt
+           cat env.sh
+
 
 
 ---------------Question 9)   use environment variables and display appropriate message --------------------------  
@@ -202,13 +246,492 @@ jobs:
         steps:
             - run : env
 
- ---------------Question 10)   use environment variables and display appropriate message --------------------------       
+ ---------------Question 10)   use environment variables and display appropriate message --------------------------
+repository_level
 
+workflow_level
+--------------
+ImageOS=ubuntu24
+GITHUB_REPOSITORY_OWNER=navishdevops
+
+Job level
+---------
+GITHUB_REF_NAME=main
+GITHUB_JOB=default-env
+
+step level:
+POWERSHELL_DISTRIBUTION_CHANNEL=GitHub-Actions-ubuntu24
+RUNNER_ENVIRONMENT
+
+
+name: variables workflow
+env:
+   ImageOS: ubuntu24
+   GITHUB_REPOSITORY_OWNER: navishdevops
+on: workflow_dispatch
+jobs:
+   job1:
+     name: defining varibales at job level
+     env:
+       GITHUB_REF_NAME: main
+       RUNNER_OS: Linux
+     runs-on: ubuntu-latest
+     steps:
+        - name: defining variables at step level
+          env: 
+             POWERSHELL_DISTRIBUTION_CHANNEL: GitHub-Actions-ubuntu24
+             RUNNER_ENVIRONMENT: github-hosted
+          run: |
+            echo " I am s.using $POWERSHELL_DISTRIBUTION_CHANNEL and its based on $RUNNER_ENVIRONMENT  runner. "
+            echo " I am j.using $GITHUB_REF_NAME branch and its deployed on $RUNNER_OS distrubution. "
+            echo " I am w.using $ImageOS branch and its owner is $GITHUB_REPOSITORY_OWNER. "
+            echo " I am r.using ${{ vars.NAME }} and profession is ${{ vars.PROFESSION }} "
+
+        - name: defining variables using job level
+          run: |
+            echo " I am s.using $POWERSHELL_DISTRIBUTION_CHANNEL and its based on $RUNNER_ENVIRONMENT  runner. "
+            echo " I am j.using $GITHUB_REF_NAME branch and its deployed on $RUNNER_OS distrubution. "
+            echo " I am w.using $ImageOS branch and its owner is $GITHUB_REPOSITORY_OWNER. "
+            echo " I am r.using ${{ vars.NAME }} and profession is ${{ vars.PROFESSION }} "
+   job2:
+     name: defining varibales at workflow level
+     runs-on: ubuntu-latest
+     steps:
+        - run : |
+              echo " I am s.using $POWERSHELL_DISTRIBUTION_CHANNEL and its based on $RUNNER_ENVIRONMENT  runner. "
+              echo " I am j.using $GITHUB_REF_NAME branch and its deployed on $RUNNER_OS distrubution. "
+              echo " I am w.using $ImageOS branch and its owner is $GITHUB_REPOSITORY_OWNER. "
+              echo " I am r.using ${{ vars.NAME }} and profession is ${{ vars.PROFESSION }} "
+
+ ---------------Question 10)   use environment variables and display appropriate message --------------------------
+repository_level
+
+workflow_level
+--------------
+ImageOS=ubuntu24
+GITHUB_REPOSITORY_OWNER=navishdevops
+
+Job level
+---------
+GITHUB_REF_NAME=main
+GITHUB_JOB=default-env
+
+step level:
+POWERSHELL_DISTRIBUTION_CHANNEL=GitHub-Actions-ubuntu24
+RUNNER_ENVIRONMENT
+
+
+name: custom variables workflow
+env:
+   Image_OS: ubuntu24
+   GITUB_REPOSITORY_OWNER: navishdevops
+on: workflow_dispatch
+jobs:
+   job1:
+     name: defining varibales at job level
+     env:
+       GITUB_REF_NAME: main
+       RUNER_OS: Linux
+     runs-on: ubuntu-latest
+     steps:
+        - name: defining variables at step level
+          env: 
+             POWERSHEL_DISTRIBUTION_CHANNEL: GitHub-Actions-ubuntu24
+             RUNER_ENVIRONMENT: github-hosted
+          run: |
+            echo " I am s.using $POWERSHEL_DISTRIBUTION_CHANNEL and its based on $RUNER_ENVIRONMENT  runner. "
+            echo " I am j.using $GITUB_REF_NAME branch and its deployed on $RUNER_OS distrubution. "
+            echo " I am w.using $Image_OS branch and its owner is $GITUB_REPOSITORY_OWNER. "
+            echo " I am r.using ${{ vars.NAME }} and profession is ${{ vars.PROFESSION }} "
+
+        - name: defining variables using job level
+          run: |
+            echo " I am s.using $POWERSHEL_DISTRIBUTION_CHANNEL and its based on $RUNER_ENVIRONMENT  runner. "
+            echo " I am j.using $GITUB_REF_NAME branch and its deployed on $RUNER_OS distrubution. "
+            echo " I am w.using $Image_OS branch and its owner is $GITUB_REPOSITORY_OWNER. "
+            echo " I am r.using ${{ vars.NAME }} and profession is ${{ vars.PROFESSION }} "
+   job2:
+     name: defining varibales at workflow level
+     runs-on: ubuntu-latest
+     steps:
+        - run : |
+            echo " I am s.using $POWERSHEL_DISTRIBUTION_CHANNEL and its based on $RUNER_ENVIRONMENT  runner. "
+            echo " I am j.using $GITUB_REF_NAME branch and its deployed on $RUNER_OS distrubution. "
+            echo " I am w.using $Image_OS branch and its owner is $GITUB_REPOSITORY_OWNER. "
+            echo " I am r.using ${{ vars.NAME }} and profession is ${{ vars.PROFESSION }} "
 
   ---------------Question 11)  Release branches creation --------------------------   
 
 
-   ---------------Question 12)  once 1st workflow is completed automatically 2nd workflow should get trigger. --------------------------   
+   ---------------Question 12)  once 1st workflow is completed automatically 2nd workflow should get trigger. --------------------------  
+-----------------------------------
+name: first workflow
+on: 
+  workflow_dispatch: 
+           branch: [main]
+jobs:
+    build:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - run: |
+               chmod +x run_env.sh
+               sh run_env.sh
+
+name: second workflow
+on: 
+  workflow_run:
+       workflows: ["first workflow"]
+       types: 
+         - completed
+jobs: 
+    check: 
+       runs-on: ubuntu-latest
+       steps: 
+         - run: echo "Second workflow automatically runs Successfully once after first workflow finished."
+
+===============================================================================================
+
+name: Multi Event Workflow
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+  schedule:
+    - cron: "0 5 * * *"
+  release:
+    types: [created]
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Triggered workflow"
+
+===================================================================================================
+  Events examples         
+
+
+name:
+on: 
+  push: 
+    branch: [main]
+jobs: 
+    build:
+      runs-on:
+      steps:
+        - uses: actions/checkout@v4
+        - run: |
+          chmod +x run_env.sh
+          sh run_env.sh
+-----------------------------------
+name:
+on: 
+  push: 
+    branch: 
+        - main
+        - dev
+        - staging
+        - prod 
+jobs: 
+    build:
+      runs-on:
+      steps:
+        - uses: actions/checkout@v4
+        - run: |
+          chmod +x run_env.sh
+          sh run_env.sh
+
+--------------------------Question 13)  concurrency:  ------------------------------
+concurrency ---  on:
+                    push:
+                       branches: [ main ] 
+                 concurrency:
+                      group: deploy-main
+                      cancel-in-progress: true
+cancel-in-progess ::: by deafult the cancel-in-progress is false and  the workflows which is running will run 
+                                     and if you execute another workflow it will also run simultaneously.
+                      if you mention cancel-in-progress as true : if you triggered a workflow , 
+                      that is progress and not completed yet and again you triggered another workflow then the 
+                      second workflow will be in run automatically (  the previous workflow will be cancelled immediately.)
+
+name: Deployment Workflow
+
+on:
+  push:
+    branches: [ main ]
+
+concurrency:
+  group: deploy-main
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deploying latest version"
+      - run: sleep 20
+      - run: echo "Deployment complete"
+
+============================================= QUestion 14)  timeout-minutes: 12 =========================================
+
+name: Deployment Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Deployment script
+        timeout-minutes: 15
+        run: bash deploy.sh
+
+
++++++++++++++++++++++++++++++++++++++++++++++ question 15) matrix strategy +++++++++++++++++++++++++++++++++++++++++
+
+name: matrix-demo
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [16, 18]
+        exclude:
+          - os: windows-latest
+            node: 18
+        include:
+          - os: ubuntu-latest
+            node: 20
+    steps:
+      - name: Print matrix values
+        run: |
+          echo "OS: ${{ matrix.os }}"
+          echo "Node: ${{ matrix.node }}"
+***************************************************** imp examples *****************************************************
+name: matrix-docker-push
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+
+      matrix:
+        registry: [ecr, acr]
+        env: [dev, prod]
+
+        exclude:
+          # Example: prod not allowed to ACR
+          - registry: acr
+            env: prod
+
+        include:
+          # Legacy prod image to ECR
+          - registry: ecr
+            env: prod
+            legacy: true
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      # -------------------- AWS ECR LOGIN --------------------
+      - name: Login to AWS ECR
+        if: matrix.registry == 'ecr'
+        uses: aws-actions/amazon-ecr-login@v2
+
+      # -------------------- AZURE ACR LOGIN ------------------
+      - name: Login to Azure ACR
+        if: matrix.registry == 'acr'
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.ACR_LOGIN_SERVER }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      # -------------------- BUILD & PUSH --------------------
+      - name: Build and push image
+        env:
+          IMAGE_TAG: ${{ matrix.env }}
+        run: |
+          if [ "${{ matrix.registry }}" = "ecr" ]; then
+            IMAGE="${{ secrets.ECR_REGISTRY }}/myapp:${IMAGE_TAG}"
+          else
+            IMAGE="${{ secrets.ACR_LOGIN_SERVER }}/myapp:${IMAGE_TAG}"
+          fi
+
+          echo "Building image: $IMAGE"
+
+          docker build -t $IMAGE .
+          docker push $IMAGE
+############################################ Docker - matrix stratrgy #############################################
+
+name: matrix-private-docker-push
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+
+      matrix:
+        env: [dev, prod]
+        image_tag: [v1, v2]
+
+        exclude:
+          # Example policy: prod should not push v2 yet
+          - env: prod
+            image_tag: v2
+        include:
+          # Example policy: prod should not push v2 yet
+          - env: dev
+            image_tag: v3
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Login to Private Docker Registry
+        run: |
+          echo "${{ secrets.PRIVATE_REGISTRY_PASSWORD }}" | \
+          docker login ${{ secrets.PRIVATE_REGISTRY_URL }} \
+            -u "${{ secrets.PRIVATE_REGISTRY_USERNAME }}" \
+            --password-stdin
+
+      - name: Build and push Docker image
+        run: |
+          IMAGE="${{ secrets.PRIVATE_REGISTRY_URL }}/myapp:${{ matrix.env }}-${{ matrix.image_tag }}"
+
+          echo "Building image: $IMAGE"
+
+          docker build -t $IMAGE .
+          docker push $IMAGE
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! CI CD PIPELLINE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+name: CICD Pipeline 3
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  compile:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: install maven
+        run: |
+          sudo apt update
+          sudo apt install maven -y
+
+      - name: Build with Maven
+        run: mvn -B clean package
 
 
 
+  sonarqube:
+    runs-on: self-hosted
+    needs: compile
+    steps:
+    #  - uses: actions/checkout@v4
+
+    #  - name: Set up JDK 17
+    #    uses: actions/setup-java@v4
+    #     with:
+    #      java-version: '17'
+    #       distribution: 'temurin'
+    #       cache: maven
+
+      - name: SonarQube Analysis
+        run: mvn sonar:sonar
+
+
+
+  security-check:
+    runs-on: self-hosted
+    needs: sonarqube
+    steps:
+      #- uses: actions/checkout@v4
+
+      - name: Install Trivy
+        run: |
+          wget https://github.com/aquasecurity/trivy/releases/download/v0.67.2/trivy_0.67.2_Linux-64bit.deb
+          sudo dpkg -i trivy_0.67.2_Linux-64bit.deb
+
+      - name: Trivy FS Scan
+        run: trivy fs --format table -o fs-report.json .
+
+
+
+
+
+  docker-build:
+    runs-on: self-hosted
+    needs: security-check
+    steps:
+     # - uses: actions/checkout@v4
+
+      - name: Build Docker Image
+        run: |
+          docker build -t ${{ secrets.Docker_Repository }}:${{ github.sha }} .
+    
+      - name: Push images to Docker Hub
+        run: |
+          docker push ${{ secrets.Docker_Repository }}:${{ github.sha }}
+        # docker push ${{ secrets.Docker_Repository }}:latest 
+
+
+
+
+  deploy-eks:
+    runs-on: self-hosted
+    needs: docker-build
+    steps:
+      #- uses: actions/checkout@v4
+
+      - name: Configure kubeconfig
+        run: |
+          aws eks update-kubeconfig \
+            --name ${{ secrets.EKS_CLUSTER_NAME }} \
+            --region ${{ secrets.AWS_REGION }}
+
+      - name: Update Deployment Image
+        run: |
+          kubectl set image deployment/javawebappdep \
+            javawebapp=${{ secrets.Docker_Repository }}:${{ github.sha }}
+
+
+      - name: Verify rollout
+        run: kubectl rollout status deployment/javawebappdep
