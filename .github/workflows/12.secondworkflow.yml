@@ -6,6 +6,6 @@ on:
          - completed
 jobs: 
     check: 
-       runs-on: ubunutu-latest
+       runs-on: ubuntu-latest
        steps: 
          - run: echo "Second workflow automatically runs Successfully once after first workflow finished."
