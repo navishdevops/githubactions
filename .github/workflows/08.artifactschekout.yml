@@ -15,7 +15,7 @@ jobs:
              name: env_var
              path: env.sh
   download:
-     name: artifacts upload
+     name: artifacts download
      runs-on: ubuntu-latest
      needs: upload
      steps:
