@@ -19,14 +19,14 @@ jobs:
             echo " I am s.using $POWERSHELL_DISTRIBUTION_CHANNEL and its based on $RUNNER_ENVIRONMENT  runner. "
             echo " I am j.using $GITHUB_REF_NAME branch and its deployed on $RUNNER_OS distrubution. "
             echo " I am w.using $ImageOS branch and its owner is $GITHUB_REPOSITORY_OWNER. "
-            echo " I am r.using ${{var.NAME}} and profession is ${{var.PROFESSION}} "
+            echo " I am r.using ${{ var.NAME }} and profession is ${{ var.PROFESSION }} "
 
         - name: defining variables using job level
           run: |
             echo " I am s.using $POWERSHELL_DISTRIBUTION_CHANNEL and its based on $RUNNER_ENVIRONMENT  runner. "
             echo " I am j.using $GITHUB_REF_NAME branch and its deployed on $RUNNER_OS distrubution. "
             echo " I am w.using $ImageOS branch and its owner is $GITHUB_REPOSITORY_OWNER. "
-            echo " I am r.using ${{var.NAME}} and profession is ${{var.PROFESSION}} "
+            echo " I am r.using ${{ var.NAME }} and profession is ${{ var.PROFESSION }} "
    job2:
      name: defining varibales at workflow level
      runs-on: ubuntu-latest
@@ -35,4 +35,4 @@ jobs:
               echo " I am s.using $POWERSHELL_DISTRIBUTION_CHANNEL and its based on $RUNNER_ENVIRONMENT  runner. "
               echo " I am j.using $GITHUB_REF_NAME branch and its deployed on $RUNNER_OS distrubution. "
               echo " I am w.using $ImageOS branch and its owner is $GITHUB_REPOSITORY_OWNER. "
-              echo " I am r.using ${{var.NAME}} and profession is ${{var.PROFESSION}} "
+              echo " I am r.using ${{ var.NAME }} and profession is ${{ var.PROFESSION }} "
