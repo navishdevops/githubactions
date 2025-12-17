@@ -1,0 +1,3 @@
+echo $SHELL
+echo $GITHUB_REPOSITORY
+echo $GITHUB_ACTIONS
