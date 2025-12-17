@@ -1,0 +1,11 @@
+name: first workflow
+on: 
+  workflow_dispatch: 
+    branch: [main]
+    build:
+      runs-on: ubunutu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - run: |
+          chmod +x run_env.sh
+          sh run_env.sh 
