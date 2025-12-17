@@ -16,15 +16,15 @@ jobs:
              POWERSHELL_DISTRIBUTION_CHANNEL: GitHub-Actions-ubuntu24
              RUNNER_ENVIRONMENT: github-hosted
           run: |
-            echo " I am s.using $GITHUB_REF_NAME branch and its deployed on $RUNNER_OS distrubution. "
-            echo " I am j.using $POWERSHELL_DISTRIBUTION_CHANNEL and its based on $RUNNER_ENVIRONMENT  runner. "
+            echo " I am s.using $POWERSHELL_DISTRIBUTION_CHANNEL and its based on $RUNNER_ENVIRONMENT  runner. "
+            echo " I am j.using $GITHUB_REF_NAME branch and its deployed on $RUNNER_OS distrubution. "
             echo " I am w.using $ImageOS branch and its owner is $GITHUB_REPOSITORY_OWNER. "
             echo " I am r.using $NAME and profession is $PROFESSION "
 
         - name: defining variables using job level
           run: |
-            echo " I am s.using $GITHUB_REF_NAME branch and its deployed on $RUNNER_OS distrubution. "
-            echo " I am j.using $POWERSHELL_DISTRIBUTION_CHANNEL and its based on $RUNNER_ENVIRONMENT  runner. "
+            echo " I am s.using $POWERSHELL_DISTRIBUTION_CHANNEL and its based on $RUNNER_ENVIRONMENT  runner. "
+            echo " I am j.using $GITHUB_REF_NAME branch and its deployed on $RUNNER_OS distrubution. "
             echo " I am w.using $ImageOS branch and its owner is $GITHUB_REPOSITORY_OWNER. "
             echo " I am r.using $NAME and profession is $PROFESSION "
    job2:
@@ -32,7 +32,7 @@ jobs:
      runs-on: ubuntu-latest
      steps:
         - run : |
-              echo " I am s.using $GITHUB_REF_NAME branch and its deployed on $RUNNER_OS distrubution. "
-              echo " I am j.using $POWERSHELL_DISTRIBUTION_CHANNEL and its based on $RUNNER_ENVIRONMENT  runner. "
+              echo " I am s.using $POWERSHELL_DISTRIBUTION_CHANNEL and its based on $RUNNER_ENVIRONMENT  runner. "
+              echo " I am j.using $GITHUB_REF_NAME branch and its deployed on $RUNNER_OS distrubution. "
               echo " I am w.using $ImageOS branch and its owner is $GITHUB_REPOSITORY_OWNER. "
               echo " I am r.using $NAME and profession is $PROFESSION "
