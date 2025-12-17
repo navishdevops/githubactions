@@ -6,6 +6,6 @@ jobs:
          runs-on: ubuntu-latest
          steps:
               - uses: actions/checkout@v6
-              - run : |
-                  chmod +x /src/main/run_env/env_new.sh
-                  sh /src/main/run_env/env_new.sh
+              - run: |
+                  chmod +x src/main/run_env/env_new.sh
+                  sh src/main/run_env/env_new.sh
