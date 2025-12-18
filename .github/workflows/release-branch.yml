@@ -22,7 +22,7 @@ jobs:
       - name: Validate release version format
         run: |
           if [[ ! "${{ github.event.inputs.release_version }}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo "❌ Invalid version format. Use X.Y.Z (example: 1.2.0)"
+            echo "Invalid version format. Use X.Y.Z (example: 1.2.0)"
             exit 1
           fi
 
@@ -37,4 +37,20 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - n
+      - name: Check if release branch already exists
+        run: |
+          RELEASE_BRANCH="release/${{ github.event.inputs.release_version }}"
+          if git ls-remote --exit-code --heads origin "$RELEASE_BRANCH"; then
+            echo "Branch already exists. Aborting."
+            exit 1
+          fi
+
+      - name: Create release branch from production
+        run: |
+          RELEASE_BRANCH="release/${{ github.event.inputs.release_version }}"
+          git checkout -b "$RELEASE_BRANCH"
+
+      - name: Push release branch to origin
+        run: |
+          RELEASE_BRANCH="release/${{ github.event.inputs.release_version }}"
+          git push origin "$RELEASE_BRANCH"
