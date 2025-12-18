@@ -1,0 +1,57 @@
+name: Create Release Branch (Production Safe)
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_version:
+        description: "Release version (example: 1.2.0)"
+        required: true
+        type: string
+
+permissions:
+  contents: write   # required to create branches
+  actions: read
+
+jobs:
+  create-release-branch:
+    name: Create release branch from production
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Validate release version format
+        run: |
+          if [[ ! "${{ github.event.inputs.release_version }}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "❌ Invalid version format. Use X.Y.Z (example: 1.2.0)"
+            exit 1
+          fi
+
+      - name: Checkout production branch
+        uses: actions/checkout@v4
+        with:
+          ref: production
+          fetch-depth: 0
+
+      - name: Configure Git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Check if release branch already exists
+        run: |
+          RELEASE_BRANCH="release/${{ github.event.inputs.release_version }}"
+
+          if git ls-remote --exit-code --heads origin "$RELEASE_BRANCH"; then
+            echo "❌ Branch '$RELEASE_BRANCH' already exists. Aborting."
+            exit 1
+          fi
+
+      - name: Create release branch from production
+        run: |
+          RELEASE_BRANCH="release/${{ github.event.inputs.release_version }}"
+          git checkout -b "$RELEASE_BRANCH"
+
+      - name: Push release branch to origin
+        run: |
+          RELEASE_BRANCH="release/${{ github.event.inputs.release_version }}"
+          git push origin "$RELEASE_BRANCH"
