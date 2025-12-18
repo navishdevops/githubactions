@@ -9,7 +9,7 @@ on:
         type: string
 
 permissions:
-  contents: write   # required to create branches
+  contents: write
   actions: read
 
 jobs:
@@ -37,21 +37,4 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Check if release branch already exists
-        run: |
-          RELEASE_BRANCH="release/${{ github.event.inputs.release_version }}"
-
-          if git ls-remote --exit-code --heads origin "$RELEASE_BRANCH"; then
-            echo "❌ Branch '$RELEASE_BRANCH' already exists. Aborting."
-            exit 1
-          fi
-
-      - name: Create release branch from production
-        run: |
-          RELEASE_BRANCH="release/${{ github.event.inputs.release_version }}"
-          git checkout -b "$RELEASE_BRANCH"
-
-      - name: Push release branch to origin
-        run: |
-          RELEASE_BRANCH="release/${{ github.event.inputs.release_version }}"
-          git push origin "$RELEASE_BRANCH"
+      - n
