@@ -11,11 +11,14 @@ jobs:
               cat README.md 
    second-job: 
       name: technical interview
+      needs: first-job
       runs-on: ubuntu-latest
       steps: 
+         - uses: actions/checkout@v4
          - run: sh run_env.sh
    third-job:
        name: finished two jobs
+       needs: second-job
        runs-on: ubuntu-latest
        steps: 
          - run: echo "Great, You got selected"
