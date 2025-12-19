@@ -7,5 +7,16 @@ jobs:
       steps:
          - uses: actions/checkout@v4
          - run: |
-              echo "Tell me about yourself"
-              cat README.md   
+              echo " Tell me about yourself"
+              cat README.md 
+   second-job: 
+      name: technical interview
+      runs-on: ubuntu-latest
+      steps: 
+         - uses: actions/checkout@v4
+         - run: sh run_env.sh
+   third-job:
+       name: finished two jobs
+       runs-on: ubuntu-latest
+       steps: 
+         - run: echo "Great, You got selected"
