@@ -2,7 +2,7 @@ name: First workflow
 on: workflow_dispatch
 jobs:
   first-job: 
-     name: interview questions
+     name: first-interview questions
      runs-on: ubuntu-latest
      steps:
         - run: echo " Tell me about yourself"  > int.sh
@@ -12,7 +12,7 @@ jobs:
              path: int.sh
 
   second-job:
-      name: interview questions
+      name: second-interview questions
       needs: first-job
       runs-on: ubuntu-latest
       steps:
@@ -26,17 +26,17 @@ jobs:
         - run:  sh run_env.sh >> int.sh
         - uses: actions/upload-artifact@v4
           with:
-             name: interview
+             name: secondinterview
              path: int.sh
 
   third-job:
-      name: interview questions
+      name: third-interview questions
       needs: second-job
       runs-on: ubuntu-latest
       steps: 
         - uses: actions/download-artifact@v4
           with:
-            name: interview
+            name: secondinterview
         - run: |
              ls -lrth
              cat int.sh
