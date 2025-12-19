@@ -19,7 +19,6 @@ jobs:
         - uses: actions/download-artifact@v4
           with:
             name: interview
-        - uses: actions/checkout@v4
         - run: |
              ls -lrth
              cat interview
@@ -35,7 +34,9 @@ jobs:
       runs-on: ubuntu-latest
       steps: 
         - uses: actions/download-artifact@v4
-        - uses: actions/checkout@v4
+          with:
+            name: interview
         - run: |
+             ls -lrth
              cat int.sh
              echo "Succesfully tested the upload and download actions"
