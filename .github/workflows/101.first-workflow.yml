@@ -5,9 +5,7 @@ jobs:
       name: interview questions
       runs-on: ubuntu-latest
       steps:
-         - name: first question
-           run: echo "Tell me about yourself"
-         - name: second question
-           uses: actions/checkout@v4
-         - name: third question
-           run:  cat README.md
+         - uses: actions/checkout@v4
+         - run: |
+              echo "Tell me about yourself"
+              cat README.md   
