@@ -34,6 +34,7 @@ jobs:
       runs-on: ubuntu-latest
       steps: 
         - uses: actions/download-artifact@v3
+        - uses: actions/checkout@v4
         - run: |
-            cat int.sh
-			echo "Succesfully tested the upload and download actions"
+             cat int.sh
+             echo "Succesfully tested the upload and download actions"
