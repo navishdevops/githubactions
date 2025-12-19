@@ -1,0 +1,11 @@
+name: First workflow
+on: workflow_dispatch
+jobs: 
+   first-job:  
+      name: this is first workflow
+      runs-on: ubuntu-latest
+      steps:
+         - name: first interview QUestion
+           run: echo "Tell me about yourself"
+         - name: second question
+           run: cat README.md
