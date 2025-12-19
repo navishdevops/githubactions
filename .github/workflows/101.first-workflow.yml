@@ -16,7 +16,7 @@ jobs:
       needs: first-job
       runs-on: ubuntu-latest
       steps:
-        - uses: actions/download-artifact@v3
+        - uses: actions/download-artifact@v4
           with:
             name: interview
         - uses: actions/checkout@v4
@@ -33,7 +33,7 @@ jobs:
       needs: second-job
       runs-on: ubuntu-latest
       steps: 
-        - uses: actions/download-artifact@v3
+        - uses: actions/download-artifact@v4
         - uses: actions/checkout@v4
         - run: |
              cat int.sh
