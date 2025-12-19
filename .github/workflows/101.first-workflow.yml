@@ -25,6 +25,7 @@ jobs:
              cat int.sh
              chmod +x run_env.sh
              sh run_env.sh >> int.sh
+             cat README.md >> int.sh
              cat int.sh
         - uses: actions/upload-artifact@v4
           with:
