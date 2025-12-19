@@ -21,6 +21,7 @@ jobs:
             name: interview
         - uses: actions/checkout@v4
         - run: |
+             ls -lrth
              cat interview
              sh run_env.sh >> int.sh
         - uses: actions/upload-artifact@v4
