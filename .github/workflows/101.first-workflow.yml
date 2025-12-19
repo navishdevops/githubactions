@@ -16,16 +16,18 @@ jobs:
       needs: first-job
       runs-on: ubuntu-latest
       steps:
+        - uses: actions/checkout@v4
         - uses: actions/download-artifact@v4
           with:
             name: interview
         - run: |
              ls -lrth
              cat int.sh
-        - uses: actions/checkout@v4
         - run: |
             chmod +x run_env.sh
             sh run_env.sh >> int.sh
+            ls -lrth
+            cat int.sh
         - uses: actions/upload-artifact@v4
           with:
              name: secondinterview
