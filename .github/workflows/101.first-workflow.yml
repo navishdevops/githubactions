@@ -1,24 +1,39 @@
 name: First workflow
 on: workflow_dispatch
 jobs:
-   first-job:
+  first-job: 
+     name: interview questions
+     runs-on: ubuntu-latest
+     steps:
+        - run: echo " Tell me about yourself"  > int.sh
+        - uses: actions/upload-artifact@v4
+          with:
+             name: interview
+             path: int.sh
+
+  second-job:
       name: interview questions
-      runs-on: ubuntu-latest
-      steps:
-         - uses: actions/checkout@v4
-         - run: |
-              echo " Tell me about yourself"
-              cat README.md 
-   second-job: 
-      name: technical interview
       needs: first-job
       runs-on: ubuntu-latest
+      steps:
+        - uses: actions/download-artifact@v3
+          with:
+            name: interview
+        - uses: actions/checkout@v4
+        - run: |
+             cat int.sh
+             sh run_env.sh >> int.sh
+        - uses: actions/upload-artifact@v4
+          with:
+             name: interview
+             path: int.sh
+
+  third-job:
+      name: interview questions
+      needs: second-job
+      runs-on: ubuntu-latest
       steps: 
-         - uses: actions/checkout@v4
-         - run: sh run_env.sh
-   third-job:
-       name: finished two jobs
-       needs: second-job
-       runs-on: ubuntu-latest
-       steps: 
-         - run: echo "Great, You got selected"
+        - uses: actions/download-artifact@v3
+        - run: |
+            cat int.sh
+			echo "Succesfully tested the upload and download actions"
