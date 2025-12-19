@@ -13,7 +13,6 @@ jobs:
       name: technical interview
       runs-on: ubuntu-latest
       steps: 
-         - uses: actions/checkout@v4
          - run: sh run_env.sh
    third-job:
        name: finished two jobs
