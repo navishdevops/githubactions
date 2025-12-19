@@ -23,11 +23,9 @@ jobs:
         - run: |
              ls -lrth
              cat int.sh
-        - run: |
-            chmod +x run_env.sh
-            sh run_env.sh >> int.sh
-            ls -lrth
-            cat int.sh
+             chmod +x run_env.sh
+             sh run_env.sh >> int.sh
+             cat int.sh
         - uses: actions/upload-artifact@v4
           with:
              name: secondinterview
