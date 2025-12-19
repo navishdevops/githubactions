@@ -21,7 +21,7 @@ jobs:
             name: interview
         - run: |
              ls -lrth
-             cat interview
+             cat int.sh
              sh run_env.sh >> int.sh
         - uses: actions/upload-artifact@v4
           with:
