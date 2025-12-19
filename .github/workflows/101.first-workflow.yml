@@ -23,6 +23,7 @@ jobs:
         - run: |
              ls -lrth
              cat int.sh
+             echo "---------------"
              chmod +x run_env.sh
              sh run_env.sh >> int.sh
              cat README.md >> int.sh
