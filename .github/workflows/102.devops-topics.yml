@@ -11,7 +11,7 @@ jobs:
        RUNER_OS: Linux
      runs-on: ubuntu-latest
      steps:
-        - name: defining variables at step level
+        - name: defining varss at step job workflow and repo
           env: 
              POWERSHEL_DISTRIBUTION_CHANNEL: GitHub-Actions-ubuntu24
              RUNER_ENVIRONMENT: github-hosted
@@ -28,7 +28,7 @@ jobs:
             echo " I am w.using $Image_OS branch and its owner is $GITUB_REPOSITORY_OWNER. "
             echo " I am r.using ${{ vars.NAME }} and profession is ${{ vars.PROFESSION }} "
    job2:
-     name: defining varibales at workflow level
+     name: defining vars at workflow and repo level
      runs-on: ubuntu-latest
      steps:
         - run : |
