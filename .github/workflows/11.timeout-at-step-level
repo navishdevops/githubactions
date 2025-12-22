@@ -7,5 +7,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: sleep
-        run: sleep 180
-        timeout-minutes: 1
+        run: sleep 1800
+        timeout-minutes: 3
