@@ -7,6 +7,6 @@ jobs:
     name: step  level timeout
     runs-on: ubuntu-latest
     steps:
-        - run: |
-          sleep 180
-          timeout-minutes: 2
+        - name: sleep 
+          run: sleep 180
+          timeout-minutes: 1
