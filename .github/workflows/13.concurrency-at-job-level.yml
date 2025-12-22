@@ -1,8 +1,11 @@
 name: Concurrency at job level
 
 on:
-  push:
-    branches: [ main ]
+   workflow_dispatch:
+      branches:
+          - main
+          - dev
+          - production
 
 jobs:
   build:
