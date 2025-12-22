@@ -1,0 +1,24 @@
+name: Concurrency at job level
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: build-job
+    concurrency:
+      group: build-main
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "building latest version"
+      - run: sleep 20
+      - run: echo "build complete"
+  deploy:
+    name: deploy-job
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "deploying latest version"
+      - run: sleep 20
+      - run: echo "deploy complete"
