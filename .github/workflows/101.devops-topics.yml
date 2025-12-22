@@ -1,4 +1,4 @@
-name: First workflow
+name: First devops topics
 on: workflow_dispatch
 jobs:
   first-job: 
