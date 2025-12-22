@@ -6,9 +6,9 @@ on:
           - dev
           - production
 jobs:
-   job1
+   job1:
    name: steptimeout
-   runs-on:
+   runs-on: ubuntu-latest
    steps:
       - run: |
          sleep 120
