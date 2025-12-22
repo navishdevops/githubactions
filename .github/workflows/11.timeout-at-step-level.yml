@@ -10,6 +10,6 @@ jobs:
     name: steptimeout
     runs-on: ubuntu-latest
     steps:
-        - run: |
-          sleep 120
-          timeout-minutes: 2
+        - name: sleep for few seconds
+          run: sleep 130
+          timeout-minutes: 1
