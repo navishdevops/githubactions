@@ -1,0 +1,38 @@
+name: custom variables workflow
+env:
+   Image_OS: ubuntu24
+   GITUB_REPOSITORY_OWNER: navishdevops
+on: workflow_dispatch
+jobs:
+   job1:
+     name: defining varibales at job level
+     env:
+       GITUB_REF_NAME: main
+       RUNER_OS: Linux
+     runs-on: ubuntu-latest
+     steps:
+        - name: defining variables at step level
+          env: 
+             POWERSHEL_DISTRIBUTION_CHANNEL: GitHub-Actions-ubuntu24
+             RUNER_ENVIRONMENT: github-hosted
+          run: |
+            echo " I am s.using $POWERSHEL_DISTRIBUTION_CHANNEL and its based on $RUNER_ENVIRONMENT  runner. "
+            echo " I am j.using $GITUB_REF_NAME branch and its deployed on $RUNER_OS distrubution. "
+            echo " I am w.using $Image_OS branch and its owner is $GITUB_REPOSITORY_OWNER. "
+            echo " I am r.using ${{ vars.NAME }} and profession is ${{ vars.PROFESSION }} "
+
+        - name: defining variables using job level
+          run: |
+            echo " I am s.using $POWERSHEL_DISTRIBUTION_CHANNEL and its based on $RUNER_ENVIRONMENT  runner. "
+            echo " I am j.using $GITUB_REF_NAME branch and its deployed on $RUNER_OS distrubution. "
+            echo " I am w.using $Image_OS branch and its owner is $GITUB_REPOSITORY_OWNER. "
+            echo " I am r.using ${{ vars.NAME }} and profession is ${{ vars.PROFESSION }} "
+   job2:
+     name: defining varibales at workflow level
+     runs-on: ubuntu-latest
+     steps:
+        - run : |
+            echo " I am s.using $POWERSHEL_DISTRIBUTION_CHANNEL and its based on $RUNER_ENVIRONMENT  runner. "
+            echo " I am j.using $GITUB_REF_NAME branch and its deployed on $RUNER_OS distrubution. "
+            echo " I am w.using $Image_OS branch and its owner is $GITUB_REPOSITORY_OWNER. "
+            echo " I am r.using ${{ vars.NAME }} and profession is ${{ vars.PROFESSION }} "
