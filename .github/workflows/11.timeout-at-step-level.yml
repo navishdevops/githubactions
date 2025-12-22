@@ -1,0 +1,15 @@
+name: step and job level timeout
+on:
+   workflow_dispatch:
+      branches:
+          - main
+          - dev
+          - production
+jobs:
+   job1
+   name: steptimeout
+   runs-on:
+   steps:
+      - run: |
+         sleep 120
+         timeout-minutes: 2
