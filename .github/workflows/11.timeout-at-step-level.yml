@@ -7,9 +7,9 @@ on:
           - production
 jobs:
    job1:
-   name: steptimeout
-   runs-on: ubuntu-latest
-   steps:
-      - run: |
-         sleep 120
-         timeout-minutes: 2
+    name: steptimeout
+    runs-on: ubuntu-latest
+    steps:
+        - run: |
+          sleep 120
+          timeout-minutes: 2
