@@ -1,4 +1,4 @@
-name: step timeout
+name: timeout workflow
 on:
    workflow_dispatch:
       branches:
@@ -6,7 +6,7 @@ on:
           - dev
           - production
 jobs:
-   name: step  level timeout
+   name: step level timeout
    runs-on: ubuntu-latest
    steps:
       - run: |
