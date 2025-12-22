@@ -6,7 +6,7 @@ on:
           - dev
           - production
 jobs:
-   name: step level timeout
+   name: stepleveltimeout
    runs-on: ubuntu-latest
    steps:
       - run: |
