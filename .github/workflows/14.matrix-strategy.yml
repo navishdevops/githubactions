@@ -1,0 +1,21 @@
+name: matrix configurations
+on: push
+jobs:
+  deployment:
+     name: matrix deployments
+     runs-on: ${{ matrix.os }}
+     strategy:
+       max-parallel: 2
+       fail-fast: false
+       matrix:
+           os: [windows-latest, ubuntu-latest]
+           images: [helloworld, alpine]
+           exclude: 
+              - os : windows-latest
+                image: alpine
+           include:
+              - os : ubuntu-latest
+                image: node:alpine
+     steps:
+       - name: creating a  ${{ matrix.images }} on ${{ matrix.os }}
+         run: docker run ${{ matrix.images }}
