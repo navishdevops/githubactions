@@ -1,4 +1,4 @@
-name: custom variables workflow
+name: Second devops topics
 env:
    Image_OS: ubuntu24
    GITUB_REPOSITORY_OWNER: navishdevops
