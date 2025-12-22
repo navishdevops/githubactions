@@ -1,4 +1,4 @@
-name: timeout workflow
+name: step timeout
 on:
    workflow_dispatch:
       branches:
@@ -6,9 +6,10 @@ on:
           - dev
           - production
 jobs:
-   name: stepleveltimeout
-   runs-on: ubuntu-latest
-   steps:
-      - run: |
-         sleep 180
-         timeout-minutes: 2
+  stepjob:
+    name: step  level timeout
+    runs-on: ubuntu-latest
+    steps:
+        - run: |
+          sleep 180
+          timeout-minutes: 2
