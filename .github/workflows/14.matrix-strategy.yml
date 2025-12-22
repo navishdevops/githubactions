@@ -1,5 +1,10 @@
 name: matrix configurations
-on: push
+on:
+   workflow_dispatch:
+      branches:
+          - main
+          - dev
+          - production
 jobs:
   deployment:
      name: matrix deployments
@@ -12,10 +17,10 @@ jobs:
            images: [helloworld, alpine]
            exclude: 
               - os : windows-latest
-                image: alpine
+                images: alpine
            include:
               - os : ubuntu-latest
-                image: node:alpine
+                images: node:alpine
      steps:
        - name: creating a  ${{ matrix.images }} on ${{ matrix.os }}
          run: docker run ${{ matrix.images }}
