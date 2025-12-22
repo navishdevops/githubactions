@@ -1,7 +1,5 @@
 name: step timeout
-on:
-   workflow_dispatch:
-               branch: [main]
+on: workflow_dispatch
 jobs:
   stepjob:
     name: step  level timeout
