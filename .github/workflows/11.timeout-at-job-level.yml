@@ -1,4 +1,4 @@
-name: step and job level timeout
+name: job level timeout
 on:
    workflow_dispatch:
       branches:
