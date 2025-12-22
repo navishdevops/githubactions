@@ -1,0 +1,18 @@
+name: concurrency workflow
+on:
+   workflow_dispatch:
+      branches:
+          - main
+          - dev
+          - production
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+jobs:
+   buildjob:
+     name: build job
+     runs-on: ubuntu-latest
+     steps:
+       - run : |
+          echo "Build  Compeleted"
+          sleep 120
